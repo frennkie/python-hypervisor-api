@@ -42,6 +42,7 @@ def main():
                     vm_list[guest_name]["guest_os"] = "rhel6Guest"
                     vm_list[guest_name]["guest_datastore"] = config.ESXI_VM_DATASTORE
                     vm_list[guest_name]["guest_network"] = config.ESXI_VM_NETWORK
+                    vm_list[guest_name]["guest_turn_off"] = "yes"
                     vm_list[guest_name]["cobbler_add"] = ""
                 else:
                     key, value = line.split(":")
@@ -104,25 +105,28 @@ def main():
 
             if any(d['name'] == vm for d in server.get_systems()):
                 print("Warn: System {0} already exists! Skipping.".format(vm))
-                continue
+            else:
+                print("  * Add to Cobbler")
+                system_id = server.new_system(token)
+                server.modify_system(system_id, "name", vm, token)
+                server.modify_system(system_id, "hostname", vm_info["guest_hostname"], token)
+                server.modify_system(system_id, 'modify_interface',
+                                                {"macaddress-eth0": mac,
+                                                "dnsname-eth0": vm_info["guest_hostname"]}, token)
+                server.modify_system(system_id, "profile", vm_info["cobbler_profile"], token)
 
-            print("  * Add to Cobbler")
-
-            system_id = server.new_system(token)
-            server.modify_system(system_id, "name", vm, token)
-            server.modify_system(system_id, "hostname", vm_info["guest_hostname"], token)
-            server.modify_system(system_id, 'modify_interface',
-                                            {"macaddress-eth0": mac,
-                                             "dnsname-eth0": vm_info["guest_hostname"]}, token)
-            server.modify_system(system_id, "profile", vm_info["cobbler_profile"], token)
-
-            server.save_system(system_id, token)
-            server.sync(token)
-            print("   - done")
+                server.save_system(system_id, token)
+                server.sync(token)
+                print("   - done")
 
         else:
             print("  * Do not add to Cobbler (add is not set)")
 
+        if vm_info["guest_turn_off"].lower() in ["yes", "true"]:
+            time.sleep(2)
+            print("  * Power down VM..".format())
+            vm = host_con.get_vm_by_name(guest_name_purpose)
+            vm.power_off()
 
         print("---".format())
     print("* Disconnect from hypervisor")
