@@ -106,7 +106,7 @@ def main():
                 print("Warn: System {0} already exists! Skipping.".format(vm))
                 continue
 
-            print("    - adding to cobbler".format())
+            print("  * Add to Cobbler")
 
             system_id = server.new_system(token)
             server.modify_system(system_id, "name", vm, token)
@@ -118,9 +118,10 @@ def main():
 
             server.save_system(system_id, token)
             server.sync(token)
+            print("   - done")
 
         else:
-            print("    - not adding to cobbler (add is not set)".format())
+            print("  * Do not add to Cobbler (add is not set)")
 
 
         print("---".format())
