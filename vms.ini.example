@@ -1,5 +1,9 @@
 [auto-test2]
+# hostname
+guest_hostname: auto-test2.example.com
+
 # datastore name
+#guest_datastore:
 
 # memory for the guest in MB
 guest_mem: 1024
@@ -19,6 +23,9 @@ guest_os: ubuntu64Guest
 purpose:
 
 [auto-test3]
+# hostname
+guest_hostname: auto-test3.example.com
+
 # datastore name
 guest_datastore: datastore3
 
@@ -43,4 +50,7 @@ guest_os: centos64Guest
 #purpose of the guest (description)
 #purpose: VM to test API
 purpose:
+
+cobbler_add: yes
+cobbler_profile: CentOS-7_1503-x86_64
 
