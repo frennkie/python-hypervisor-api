@@ -1,0 +1,29 @@
+# name of the vm
+[otrs-t4]
+# hostname of the vCenter host
+host: 192.168.92.100
+
+# use host_type vmware to create an vCenter guest
+host_type: vmware
+
+# name of the ESX host in the cluster where the VM will be created
+esx_host: esxi.fritz.box
+
+# datastore name
+datastore: datastore3
+
+# memory for the guest in MB
+guest_mem: 1024
+
+# number of virtual CPU's
+guest_cpu: 1
+
+# disk space in GB
+guest_space: 5
+
+# guest_network
+guest_network: Internal-172.16.0
+
+#purpose of the guest (description)
+#purpose: VM to test API
+purpose:

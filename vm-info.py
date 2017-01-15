@@ -1,5 +1,6 @@
 #!/usr/bin/python
 from __future__ import print_function
+import sys
 import api_vmware_include
 import config
 
@@ -9,15 +10,17 @@ def main():
     user = config.ESXI_USER
     pw = config.ESXI_PASS
 
+    if len(sys.argv) == 2:
+        vm = sys.argv[1]
+    else:
+        print("Give a VM name as input...")
+        sys.exit(99)
+
     #connect to the host
     host_con = api_vmware_include.connectToHost(host, user, pw)
 
-    # list server type
-    print("Type: {}".format(host_con.get_server_type()))
-
-    print("Datacenters: {}".format(host_con.get_datacenters().items()))
-    print("Hosts: {}".format(host_con.get_hosts().items()))
-    print("Datastores: {}".format(host_con.get_datastores().items()))
+    mac = api_vmware_include.getMac(host_con, vm)
+    print(" - MAC Address: {0}".format(mac))
 
     # disconnect from the host
     host_con.disconnect()
