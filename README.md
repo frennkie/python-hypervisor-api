@@ -1,9 +1,23 @@
 # python-hypervisor-api
 Here you can find some Python scripts and includes to interract with VMWare vCenter or ESX hosts and oVirt virtualization hosts.
 
-## Next Step
+## VMware Guest OS identifier
+
+https://pubs.vmware.com/vsphere-60/index.jsp?topic=%2Fcom.vmware.wssdk.apiref.doc%2Fvim.vm.GuestOsDescriptor.GuestOsIdentifier.html
+
+## Next Step -> Cobbler integration
 
 https://dash1218.gitbooks.io/use-cobbler-and-ansible-for-deploying-cloudstack/content/chapter7/section7.1.html
+
+Two APIs
+* https://fedorahosted.org/cobbler/wiki/CobblerApi
+* https://fedorahosted.org/cobbler/wiki/CobblerXmlrpc
+
+On Cobbler Host:
+
+import cobbler.api as capi
+or
+import xmlrpclib
 
 
 
