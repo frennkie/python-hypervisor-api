@@ -20,6 +20,9 @@ guest_space: 5
 # guest OS template (e.g. rhel7_64Guest or ubuntu64Guest, centos64Guest)
 guest_os: ubuntu64Guest
 
+# turn off VM after initial MAC generation (or keep running)
+guest_turn_off: false
+
 #purpose of the guest (description)
 purpose:
 

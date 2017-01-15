@@ -35,6 +35,7 @@ def main():
                     guest_name = line[1:-1]
                     vm_list[guest_name] = {}
                     # default values, adjust or remove to specify in the input-file
+                    vm_list[guest_name]["purpose"] = ""
                     vm_list[guest_name]["esx_host"] = config.ESXI_CLUSTER_HOST
                     vm_list[guest_name]["esx_dc"] = config.ESXI_DATACENTER
                     vm_list[guest_name]["guest_ver"] = config.ESXI_VM_VERSION
@@ -56,7 +57,7 @@ def main():
     for vm in vm_list:
         vm_info = vm_list[vm]
 
-        if vm_info["purpose"]:
+        if vm_info["purpose"] and vm_info["purpose"] != "":
             guest_name_purpose = "{0} ({1})".format(vm, vm_info["purpose"])
         else:
             guest_name_purpose = "{0}".format(vm)
@@ -127,7 +128,7 @@ def main():
         else:
             print("  * Do not add to Cobbler (add is not set)")
 
-        if vm_info["guest_turn_off"].lower() in ["yes", "true"]:
+        if not vm_info["guest_turn_off"].lower() in ["false", "no"]:
             time.sleep(2)
             print("  * Power down VM..".format())
             guest.power_off()
