@@ -1,6 +1,9 @@
 [auto-test2]
-# hostname
-guest_hostname: auto-test2.example.com
+# hostname (without the domain)
+guest_hostname: auto-test2
+
+# dmain (e.g. example.com)
+guest_domain: example.com
 
 # datastore name
 #guest_datastore:
@@ -14,43 +17,22 @@ guest_cpu: 1
 # disk space in GB
 guest_space: 5
 
-
 # guest OS template (e.g. rhel7_64Guest or ubuntu64Guest, centos64Guest)
 guest_os: ubuntu64Guest
 
 #purpose of the guest (description)
-#purpose: VM to test API
 purpose:
 
 [auto-test3]
-# hostname
-guest_hostname: auto-test3.example.com
-
-# datastore name
+guest_hostname: auto-test3
+guest_domain: example.com
 guest_datastore: datastore3
-
-# memory for the guest in MB
 guest_mem: 1024
-
-# number of virtual CPU's
 guest_cpu: 1
-
-# disk space in GB
 guest_space: 5
-
-# guest_network
 guest_network: Internal-172.16.0
-
-# guest version (e.g. vmx-11)
 guest_ver: vmx-11
-
-# guest OS template (e.g. rhel7_64Guest or ubuntu64Guest, centos64Guest)
 guest_os: centos64Guest
-
-#purpose of the guest (description)
-#purpose: VM to test API
-purpose:
-
 cobbler_add: yes
 cobbler_profile: CentOS-7_1503-x86_64
 

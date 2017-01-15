@@ -43,15 +43,15 @@ def main():
                     vm_list[guest_name]["guest_datastore"] = config.ESXI_VM_DATASTORE
                     vm_list[guest_name]["guest_network"] = config.ESXI_VM_NETWORK
                     vm_list[guest_name]["guest_turn_off"] = "yes"
+                    vm_list[guest_name]["guest_hostname"] = guest_name
+                    vm_list[guest_name]["guest_domain"] = config.ESXI_VM_DOMAIN
                     vm_list[guest_name]["cobbler_add"] = ""
                 else:
                     key, value = line.split(":")
                     vm_list[guest_name][key.strip()] = value.strip()
 
     print("- Connect to hypervisor ({0})".format(config.ESXI_HOST))
-    host_pw = config.ESXI_PASS
-
-    host_con = api_vmware_include.connectToHost(config.ESXI_HOST, config.ESXI_USER , host_pw)
+    host_con = api_vmware_include.connectToHost(config.ESXI_HOST, config.ESXI_USER , config.ESXI_PASS)
 
     for vm in vm_list:
         vm_info = vm_list[vm]
@@ -60,14 +60,18 @@ def main():
             guest_name_purpose = "{0} ({1})".format(vm, vm_info["purpose"])
         else:
             guest_name_purpose = "{0}".format(vm)
+
+        vm_info["guest_fqdn"] = "{0}.{1}".format(vm_info["guest_hostname"], vm_info["guest_domain"])
+
         print("  VM: {0}".format(guest_name_purpose))
         print("  * Settings:".format())
-        print("    - datacenter: {0}".format(vm_info["esx_dc"]))
-        print("    - target host: {0}".format(vm_info["esx_host"]))
-        print("    - datastore: {0}".format(vm_info["guest_datastore"]))
-        print("    - memory: {0} {1}".format(vm_info["guest_mem"], "MB"))
-        print("    - #cpu: {0}".format(vm_info["guest_cpu"]))
-        print("    - space: {0} {1}".format(vm_info["guest_space"], "GB"))
+        print("    - Datacenter: {0}".format(vm_info["esx_dc"]))
+        print("    - Target Host: {0}".format(vm_info["esx_host"]))
+        print("    - Datastore: {0}".format(vm_info["guest_datastore"]))
+        print("    - Memory: {0} {1}".format(vm_info["guest_mem"], "MB"))
+        print("    - #CPU: {0}".format(vm_info["guest_cpu"]))
+        print("    - Space: {0} {1}".format(vm_info["guest_space"], "GB"))
+        print("    - FQDN: {0}".format(vm_info["guest_fqdn"]))
 
         print("  * Create VM..".format())
 
@@ -113,7 +117,7 @@ def main():
                 server.modify_system(system_id, "hostname", vm_info["guest_hostname"], token)
                 server.modify_system(system_id, 'modify_interface',
                                                 {"macaddress-eth0": mac,
-                                                "dnsname-eth0": vm_info["guest_hostname"]}, token)
+                                                "dnsname-eth0": vm_info["guest_fqdn"]}, token)
                 server.modify_system(system_id, "profile", vm_info["cobbler_profile"], token)
 
                 server.save_system(system_id, token)
