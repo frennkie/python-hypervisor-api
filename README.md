@@ -1,6 +1,12 @@
 # python-hypervisor-api
 Here you can find some Python scripts and includes to interract with VMWare vCenter or ESX hosts and oVirt virtualization hosts.
 
+## Next Step
+
+https://dash1218.gitbooks.io/use-cobbler-and-ansible-for-deploying-cloudstack/content/chapter7/section7.1.html
+
+
+
 ##Prerequisites
 ###to use the scripts for VMWare vCenter or ESX
 - install python-pip: (`sudo yum -y install python-pip` or similar for your distro)
