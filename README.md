@@ -9,35 +9,24 @@ https://pubs.vmware.com/vsphere-60/index.jsp?topic=%2Fcom.vmware.wssdk.apiref.do
 
 https://dash1218.gitbooks.io/use-cobbler-and-ansible-for-deploying-cloudstack/content/chapter7/section7.1.html
 
-Two APIs
-* https://fedorahosted.org/cobbler/wiki/CobblerApi
 * https://fedorahosted.org/cobbler/wiki/CobblerXmlrpc
 
-On Cobbler Host:
 
-import cobbler.api as capi
-or
 import xmlrpclib
 
 
 
-##Prerequisites
-###to use the scripts for VMWare vCenter or ESX
+## Prerequisites
+### to use the scripts for VMWare vCenter or ESX
 - install python-pip: (`sudo yum -y install python-pip` or similar for your distro)
 - pip install pysphere (`sudo pip install pysphere`)
 
 more information on my blog: [Create a new virtual machine in Vsphere with Python, Pysphere and the VMWare API](http://jensd.be/?p=370)
 
-###to use the scripts for oVirt
-- make sure you have access to the EPEL repositories (for CentOS or RHEL)
-- install ovirt-engine-sdk-python: (`sudo yum -y install ovirt-engine-sdk-python` or similar for your distro)
-
-more information on my blog: [Create a new virtual machine in oVirt with Python using the API] (http://jensd.be/?p=491)
-
-##How to use:
+## How to use:
 - edit the defaults in deploy_vm.py
 - create a textfile similar to example_ovirt.txt or example_vmware.txt
 - execute `deploy_vm.py <name of the vm-definitions file>`
 
-Multiple VM-definitions can be givin in one file. ovIrt and ESX can be combined.
+Multiple VM-definitions can be givin in one file.
 The deploy_vm is rather quick/dirty, feel free to improve it :)
