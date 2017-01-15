@@ -12,6 +12,7 @@ ESXI_DATACENTER = "ha-datacenter"
 # ESXi VM default settings
 ESXI_VM_VERSION = "vmx-11"
 ESXI_VM_NETWORK = "vmware-network1"
+ESXI_VM_DOMAIN = "example.com"
 ESXI_VM_DATASTORE = "datastore1"
 
 # Cobbler settings
