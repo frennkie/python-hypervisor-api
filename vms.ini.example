@@ -1,0 +1,46 @@
+[auto-test2]
+# datastore name
+
+# memory for the guest in MB
+guest_mem: 1024
+
+# number of virtual CPU's
+guest_cpu: 1
+
+# disk space in GB
+guest_space: 5
+
+
+# guest OS template (e.g. rhel7_64Guest or ubuntu64Guest, centos64Guest)
+guest_os: ubuntu64Guest
+
+#purpose of the guest (description)
+#purpose: VM to test API
+purpose:
+
+[auto-test3]
+# datastore name
+guest_datastore: datastore3
+
+# memory for the guest in MB
+guest_mem: 1024
+
+# number of virtual CPU's
+guest_cpu: 1
+
+# disk space in GB
+guest_space: 5
+
+# guest_network
+guest_network: Internal-172.16.0
+
+# guest version (e.g. vmx-11)
+guest_ver: vmx-11
+
+# guest OS template (e.g. rhel7_64Guest or ubuntu64Guest, centos64Guest)
+guest_os: centos64Guest
+
+#purpose of the guest (description)
+#purpose: VM to test API
+purpose:
+

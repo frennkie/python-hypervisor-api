@@ -19,8 +19,9 @@ def main():
     #connect to the host
     host_con = api_vmware_include.connectToHost(host, user, pw)
 
+    print("Checking VM: {0}".format(vm))
     mac = api_vmware_include.getMac(host_con, vm)
-    print(" - MAC Address: {0}".format(mac))
+    print("MAC Address: {0}".format(mac))
 
     # disconnect from the host
     host_con.disconnect()
