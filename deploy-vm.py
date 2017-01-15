@@ -91,7 +91,8 @@ def main():
             sys.exit(99)
 
         print("  * Start VM..".format())
-        api_vmware_include.powerOnGuest(host_con, guest_name_purpose)
+        guest = host_con.get_vm_by_name(guest_name_purpose)
+        guest.power_on()
 
         time.sleep(1)
         mac = api_vmware_include.getMac(host_con, guest_name_purpose)
@@ -125,8 +126,7 @@ def main():
         if vm_info["guest_turn_off"].lower() in ["yes", "true"]:
             time.sleep(2)
             print("  * Power down VM..".format())
-            vm = host_con.get_vm_by_name(guest_name_purpose)
-            vm.power_off()
+            guest.power_off()
 
         print("---".format())
     print("* Disconnect from hypervisor")
